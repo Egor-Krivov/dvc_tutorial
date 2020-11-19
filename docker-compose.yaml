@@ -1,0 +1,17 @@
+version: "3.6"
+
+services:
+
+  binary-clf-device-change:
+    env_file:
+      - .env
+    build:
+      context: ./
+      args:
+        GIT_CONFIG_USER_NAME: $GIT_CONFIG_USER_NAME
+        GIT_CONFIG_EMAIL: $GIT_CONFIG_EMAIL
+    image: binary-clf-device-change:latest
+    ports:
+      - 8888:8888
+    volumes:
+      - ./:/home/binary_clf_device_change
