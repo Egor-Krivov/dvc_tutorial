@@ -113,6 +113,11 @@ Build
 ln -sf config/.env 
 docker-compose build
 ```
+or 
+
+```
+docker-compose  --env-file ./config/.env build
+```
 
 Run 
 ```bash
