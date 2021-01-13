@@ -5,10 +5,14 @@
 
 ### Задача:
 - бинарная классификация
-- шаг - 1 месяц
+- таргет: событие смены девайса в течение месяца
 - целевые метрики - Lift, Precision@K, Recall@K
 
 ### Данные:
+
+**Get dataset**
+- Download data from [storage](https://yadi.sk/d/HibDNFMf3oTEoA)
+- Put data to `data/raw`
 
 **Таргет: target.feather**
 
@@ -54,7 +58,7 @@
  - Recall@K
  - Lift@K - показывает насколько модель лучше работает по сравнению с random выборкой
  
- 
+ Для тьюториала значение К = 5 % от базы клиентов
 
 
 # How to Run 
@@ -127,15 +131,3 @@ docker-compose up
 
 Open tutorial notebook:
 - open http://localhost:8888 in browser;
-
-
-## 4. Get dataset
-- Download data from [storage](https://yadi.sk/d/HibDNFMf3oTEoA)
-- Put data to `data/raw`
-
-
-## 5. Create link to data/ folder (optional)
-```bash
-cd noteboks/ 
-ln -sf ../data
-```
