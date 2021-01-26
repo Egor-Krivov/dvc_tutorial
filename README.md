@@ -131,3 +131,23 @@ docker-compose up
 
 Open tutorial notebook:
 - open http://localhost:8888 in browser;
+
+
+## 4. Run pipelines 
+
+- все команды запускаются в терминале, из корня репозитория проекта  
+
+To run `data_load` pipeline:
+```bash
+python src/pipelines/data_laod.py --config=params.yaml
+```
+
+To run `featurize` pipeline:
+```bash
+python src/pipelines/featurize.py --config=params.yaml
+```
+
+To run `train` pipeline:
+```bash
+python src/pipelines/train.py --config=params.yaml
+```
