@@ -1,19 +1,20 @@
 """This script trains model."""
 
-import argparse
 import os
-
-import catboost as ctb
-import joblib
 import json
-import matplotlib.pyplot as plt
+import yaml
+
+import joblib
+import autocommand
 import pandas as pd
 from typing import Text
-import yaml
+import catboost as ctb
 from envyaml import EnvYAML
 
-from src.train.train import custom_ts_split, get_split_data
+import matplotlib.pyplot as plt
+
 from src.utils.logging import get_logger
+from src.train.train import custom_ts_split, get_split_data
 from src.evaluate.metrics import precision_at_k_score, recall_at_k_score, lift_score
 
 
@@ -130,10 +131,4 @@ def train(config_path: Text) -> None:
     logger.info(f'Model saved to: {path}')
 
 
-if __name__ == '__main__':
-
-    args_parser = argparse.ArgumentParser()
-    args_parser.add_argument('--config', dest='config', required=True)
-    args = args_parser.parse_args()
-
-    train(config_path=args.config)
+autocommand.autocommand(__name__)(train)

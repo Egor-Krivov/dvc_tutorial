@@ -1,7 +1,8 @@
+import pytest
 import datetime
+
 import numpy as np
 import pandas as pd
-import pytest
 
 from src.train.train import custom_ts_split, get_split_data
 
@@ -52,10 +53,7 @@ class TestCustomTsSplit:
             list(custom_ts_split(months, train_period))
 
 
-
-
 class TestGetSplitData:
-
     def setup_class(self):
 
         self.start_train = pd.to_datetime('2020-04-30')
@@ -105,4 +103,3 @@ class TestGetSplitData:
 
         assert y_train.tolist() == [1, 0]
         assert y_test.tolist() == [1]
-

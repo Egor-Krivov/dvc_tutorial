@@ -1,11 +1,12 @@
 """This script extracts features from raw data."""
 
-import argparse
-import pandas as pd
-from typing import Text
 import yaml
+from typing import Text
 
-from src.data.load import load_target, load_data
+import autocommand
+import pandas as pd
+
+from src.data.load import load_feather
 from src.data.process import process_target, process_data
 from src.utils.logging import get_logger
 
@@ -15,7 +16,6 @@ def data_load(config_path: Text) -> None:
     Args:
         config_path {Text}: path to config file
     """
-
     config = yaml.safe_load(open(config_path))
 
     log_level = config['base']['log_level']
@@ -27,8 +27,8 @@ def data_load(config_path: Text) -> None:
     logger = get_logger("DATA_LOAD", log_level)
 
     logger.info('Load dataset')
-    target_df = load_target(target_raw)
-    data_df = load_data(dataset_raw)
+    target_df = load_feather(target_raw)
+    data_df = load_feather(dataset_raw)
 
     logger.info('Process target')
     target_df = process_target(target_df)
@@ -44,10 +44,4 @@ def data_load(config_path: Text) -> None:
     logger.debug(f'Processed data path: {target_processed}')
 
 
-if __name__ == '__main__':
-
-    args_parser = argparse.ArgumentParser()
-    args_parser.add_argument('--config', dest='config', required=True)
-    args = args_parser.parse_args()
-
-    data_load(config_path=args.config)
+autocommand.autocommand(__name__)(data_load)

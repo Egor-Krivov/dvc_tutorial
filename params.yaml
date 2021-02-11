@@ -1,5 +1,5 @@
 base:
-  project_dir: '/home/tutorial_predict_device_change'  # Absolute system path to the project repo
+  project_dir: '/Users/egor/projects/jet/edu/ml_prod/tutorial-predict-device-change'  # Absolute system path to the project repo
   random_state: 42
   log_level: DEBUG
 

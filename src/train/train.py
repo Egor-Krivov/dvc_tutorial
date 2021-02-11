@@ -32,7 +32,6 @@ def custom_ts_split(months: np.array, train_period: int = 0) -> Iterator:
             logger.info(months.max())
 
 
-
 def get_split_data(features: pd.DataFrame, start_train: pd.Timestamp, end_train: pd.Timestamp, test_period: pd.Timestamp
                    ) -> Tuple[pd.DataFrame]:
 

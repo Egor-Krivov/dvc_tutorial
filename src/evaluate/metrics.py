@@ -1,9 +1,11 @@
 import logging
-import matplotlib.pyplot as plt
+from typing import Iterable
+
 import numpy as np
 import pandas as pd
 from sklearn.metrics import precision_score, recall_score
-from typing import Iterable
+
+import matplotlib.pyplot as plt
 
 from src.utils.logging import get_logger
 
@@ -36,8 +38,8 @@ def plot_lift_curve(y_true: Iterable, y_pred: Iterable, step: float = 0.01) -> N
 
     # Calculate for each x value its correspondent y value
     for x in x_val:
-        num_data = int(
-            np.ceil(x * len(aux_lift)))  # The ceil function returns the closest integer bigger than our number
+        # The ceil function returns the closest integer bigger than our number
+        num_data = int(np.ceil(x * len(aux_lift)))
         data_here = aux_lift.iloc[:num_data, :]  # ie. np.ceil(1.4) = 2
         ratio_ones_here = data_here['real'].sum() / len(data_here)
         y_v.append(ratio_ones_here / ratio_ones)

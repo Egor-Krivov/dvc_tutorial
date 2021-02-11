@@ -1,7 +1,8 @@
 import pandas as pd
 
+
 def process_features(features_df: pd.DataFrame, target_df: pd.DataFrame) -> pd.DataFrame:
-    features_df = features_df.loc[features_df.user_id.isin(target_df.user_id),]
+    features_df = features_df.loc[features_df.user_id.isin(target_df.user_id), ]
     features_df['month'] = pd.to_datetime(features_df['month'])
 
     return features_df

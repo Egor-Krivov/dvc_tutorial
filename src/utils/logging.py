@@ -1,8 +1,8 @@
 """Provides functions to create loggers."""
 
+import sys
 import logging
 from typing import Text
-import sys
 
 
 def get_console_handler() -> logging.StreamHandler:
