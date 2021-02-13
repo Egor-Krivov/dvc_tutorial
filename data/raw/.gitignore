@@ -1,1 +1,5 @@
 !.gitignore
+/scoring_target.feather
+/scoring_user_features.feather
+/target.feather
+/user_features.feather
