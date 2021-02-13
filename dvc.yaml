@@ -1,0 +1,33 @@
+stages:
+  data_load:
+    cmd: python src/pipelines/data_load.py params.yaml
+    deps:
+    - data/raw/target.feather
+    - data/raw/user_features.feather
+    - src/pipelines/data_load.py
+    params:
+    - data_load
+    outs:
+    - data/processed/target.feather
+    - data/processed/user_features.feather
+  featurize:
+    cmd: python src/pipelines/featurize.py params.yaml
+    deps:
+    - data/processed/target.feather
+    - data/processed/user_features.feather
+    - src/pipelines/featurize.py
+    params:
+    - featurize
+    outs:
+    - data/processed/features.feather
+  train:
+    cmd: python src/pipelines/train.py params.yaml
+    deps:
+    - data/processed/features.feather
+    - src/pipelines/train.py
+    params:
+    - train
+    outs:
+    - models/model.joblib
+    metrics:
+    - reports/train_metrics.json

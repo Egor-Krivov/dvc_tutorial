@@ -1,1 +1,4 @@
 !.gitignore
+/target.feather
+/user_features.feather
+/features.feather

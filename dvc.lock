@@ -1,0 +1,84 @@
+data_load:
+  cmd: python src/pipelines/data_load.py params.yaml
+  deps:
+  - path: data/raw/target.feather
+    md5: b68f5c439b1bb1725037e22d0b3fbc9d
+    size: 4037466
+  - path: data/raw/user_features.feather
+    md5: 170138d124cb732d9f5658b12df9a0df
+    size: 131289906
+  - path: src/pipelines/data_load.py
+    md5: 8671ee0aa9c624b1faa2ad534a32998d
+    size: 1374
+  params:
+    params.yaml:
+      data_load:
+        target: data/raw/target.feather
+        dataset: data/raw/user_features.feather
+        target_processed: data/processed/target.feather
+        dataset_processed: data/processed/user_features.feather
+  outs:
+  - path: data/processed/target.feather
+    md5: 165404e51882c0f44029968ee161e16a
+    size: 4037466
+  - path: data/processed/user_features.feather
+    md5: d38f5c849227f93171eccb777043e526
+    size: 131289906
+featurize:
+  cmd: python src/pipelines/featurize.py params.yaml
+  deps:
+  - path: data/processed/target.feather
+    md5: 165404e51882c0f44029968ee161e16a
+    size: 4037466
+  - path: data/processed/user_features.feather
+    md5: d38f5c849227f93171eccb777043e526
+    size: 131289906
+  - path: src/pipelines/featurize.py
+    md5: 1f3a095e85ec6663bdbdad31d3a7b76b
+    size: 1392
+  params:
+    params.yaml:
+      featurize:
+        features_path: data/processed/features.feather
+        categories:
+        - feature_17
+        - feature_21
+        - feature_11
+        - feature_16
+        - feature_22
+  outs:
+  - path: data/processed/features.feather
+    md5: 60252c4d3b15ae011aa1ab373dd13fa1
+    size: 132405874
+train:
+  cmd: python src/pipelines/train.py params.yaml
+  deps:
+  - path: data/processed/features.feather
+    md5: 60252c4d3b15ae011aa1ab373dd13fa1
+    size: 132405874
+  - path: src/pipelines/train.py
+    md5: fb2a71507ac90755a90b4dc5b6a4d8c7
+    size: 4653
+  params:
+    params.yaml:
+      train:
+        catboost_params:
+          iterations: 20
+          thread_count: 20
+          has_time: true
+          allow_writing_files: false
+        top_K_coef: 0.05
+        model_path: models/model.joblib
+        train_metrics: reports/train_metrics.json
+        train_metrics_path: reports/train_metrics.json
+        train_metrics_png: reports/train_metrics.png
+        train_plots_path: reports/train_plots.csv
+        raw_metrics_path: reports/raw_metrics.csv
+        encoder_path: models/encoder.pickle
+  outs:
+  - path: models/model.joblib
+    md5: 0b6f1daf0d7b5d0d1cffa5d8198742d1
+    size: 34530
+  - path: reports/train_metrics.json
+    md5: baae9d74e1ffa47c0683e21131a280db
+    size: 447
